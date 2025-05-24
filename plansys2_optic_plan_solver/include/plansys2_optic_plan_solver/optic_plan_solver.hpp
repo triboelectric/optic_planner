@@ -16,7 +16,7 @@ class OPTICPlanSolver : public PlanSolverBase
 private:
   std::string arguments_parameter_name_;
   std::string output_dir_parameter_name_;
-  rclcpp_lifecycle::LifecycleNode::SharedPtr lc_node_;
+  bool cancel_requested_;
 
 public:
   OPTICPlanSolver();
@@ -33,6 +33,9 @@ public:
   bool isDomainValid(
     const std::string & domain,
     const std::string & node_namespace = "");
+
+protected:
+  std::optional<plansys2_msgs::msg::Plan> parse_plan_result(const std::string & plan_path);
 };
 
 }  // namespace plansys2
