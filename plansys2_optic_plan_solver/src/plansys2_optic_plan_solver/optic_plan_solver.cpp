@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include <filesystem>
 #include <string>
@@ -9,7 +10,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <fstream>
-#include <unistd.h>
 #include <csignal>
 #include <atomic>
 #include <thread>
@@ -112,7 +112,8 @@ OPTICPlanSolver::getPlan(
     lc_node_->get_name(), solver_timeout.seconds(), args.c_str(), output_dir.c_str());
 
   bool success = execute_planner("ros2 run optic_planner optic_planner " + args + " " +
-      domain_file_path.string() + " " +  problem_file_path.string(), solver_timeout, plan_file_path.string());
+      domain_file_path.string() + " " + problem_file_path.string(), solver_timeout,
+      plan_file_path.string());
 
   if (!success) {return {};}
 
